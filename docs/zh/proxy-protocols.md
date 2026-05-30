@@ -3,9 +3,11 @@
 > **Note**: dae 目前支持以下代理协议
 
 - [x] HTTP(S), naiveproxy
+
   ```
   https://[[user:]pass@]hostname:port/
   ```
+
 - [x] Socks
   - [x] Socks4
   - [x] Socks4a
@@ -24,6 +26,21 @@
   - [x] gRPC
   - [x] Meek
   - [x] HTTPUpgrade
+  - [x] XHTTP，仅限第一版 VLESS 支持
+
+  XHTTP 链接使用已有 VLESS 链接格式，例如
+  `vless://...?...type=xhttp...`。推荐使用 `type=xhttp`；`type=splithttp`
+  作为兼容别名也可使用。当前支持范围仅覆盖 H1/H2，支持 TLS 和 REALITY。
+
+  支持的 XHTTP 模式严格限定为 `auto`、`packet-up`、`stream-up` 和
+  `stream-one`。`auto` 的行为是：明文或无 TLS 使用 `packet-up`；TLS 且
+  H2 或默认 ALPN 使用 `stream-up`；TLS 且仅 `http/1.1` 使用 `packet-up`；
+  REALITY 使用 `stream-one`。
+
+  支持的 `extra` 子集严格限定为 `mode`、`scMaxEachPostBytes` 和
+  `xPaddingBytes`。所有其他 `extra` 键均不支持，并会明确失败。这不是完整
+  Xray 对等支持：H3/QUIC、`downloadSettings`、browser dialer、完整 `xmux`
+  和 VMess XHTTP 均明确不支持。
 
   [v2rayN URI Schema](https://github.com/2dust/v2rayN/wiki/%E5%88%86%E4%BA%AB%E9%93%BE%E6%8E%A5%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E(ver-2))
 
@@ -53,7 +70,7 @@
   - [x] Trojan-gfw
   - [x] Trojan-go
 
-  [trojan/trojan-go URI Schema](https://p4gefau1t.github.io/trojan-go/developer/url/)
+  [trojan/trojan-go URI Schema](https://p4gefau1t.github.io/trojan-go/developer/url)
 
 - [x] Tuic (v5)
 

@@ -3,9 +3,11 @@
 > **Note**: dae currently supports the following proxy protocols
 
 - [x] HTTP(S), naiveproxy
+
   ```
   https://[[user:]pass@]hostname:port/
   ```
+
 - [x] Socks
   - [x] Socks4
   - [x] Socks4a
@@ -24,6 +26,22 @@
   - [x] gRPC
   - [x] Meek
   - [x] HTTPUpgrade
+  - [x] XHTTP, first-version VLESS support only
+
+  XHTTP links use the existing VLESS link format, for example
+  `vless://...?...type=xhttp...`. Prefer `type=xhttp`; `type=splithttp`
+  is accepted as a compatibility alias. This support covers H1/H2 only,
+  and TLS and REALITY are supported.
+
+  Supported XHTTP modes are exactly `auto`, `packet-up`, `stream-up`, and
+  `stream-one`. In `auto`, plain or no TLS uses `packet-up`; TLS with H2 or
+  default ALPN uses `stream-up`; TLS with `http/1.1` only uses `packet-up`;
+  REALITY uses `stream-one`.
+
+  The supported `extra` subset is exactly `mode`, `scMaxEachPostBytes`, and
+  `xPaddingBytes`. All other `extra` keys are unsupported and fail explicitly.
+  This is not full Xray parity: H3/QUIC, `downloadSettings`, browser dialer,
+  full `xmux`, and VMess XHTTP are explicitly unsupported.
 
   [v2rayN URI Schema](https://github.com/2dust/v2rayN/wiki/%E5%88%86%E4%BA%AB%E9%93%BE%E6%8E%A5%E6%A0%BC%E5%BC%8F%E8%AF%B4%E6%98%8E(ver-2))
 
@@ -53,7 +71,7 @@
   - [x] Trojan-gfw
   - [x] Trojan-go
 
-  [trojan/trojan-go URI Schema](https://p4gefau1t.github.io/trojan-go/developer/url/)
+  [trojan/trojan-go URI Schema](https://p4gefau1t.github.io/trojan-go/developer/url)
 
 - [x] Tuic (v5)
 
