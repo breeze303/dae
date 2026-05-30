@@ -11,6 +11,7 @@ import (
 	"io"
 	"net"
 	"net/netip"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -186,37 +187,17 @@ func mustPSKBase64(length int, fill byte) string {
 	return base64.StdEncoding.EncodeToString(buf)
 }
 
-func TestWriteUDPConnWorksWithSS2022PacketConn(t *testing.T) {
+func TestSS2022NewDialerFailsClosed(t *testing.T) {
 	rawConn := &recordingNetConn{}
-	ssDialer, err := ss2022.NewDialer(ss2022ParentDialer{conn: rawConn}, protocol.Header{
+	_, err := ss2022.NewDialer(ss2022ParentDialer{conn: rawConn}, protocol.Header{
 		Cipher:       "2022-blake3-aes-256-gcm",
 		Password:     mustPSKBase64(32, 0x42),
 		ProxyAddress: "127.0.0.1:443",
 	})
-	if err != nil {
-		t.Fatalf("NewDialer failed: %v", err)
+	if err == nil {
+		t.Fatal("expected unsupported SS2022 error")
 	}
-
-	conn, err := ssDialer.DialContext(context.Background(), "udp", "8.8.8.8:53")
-	if err != nil {
-		t.Fatalf("DialContext failed: %v", err)
-	}
-	if _, ok := conn.(netproxy.PacketConn); !ok {
-		t.Fatalf("expected PacketConn, got %T", conn)
-	}
-
-	payload := []byte("abc")
-	if _, err := WriteUDPConn(conn, "8.8.8.8:53", payload); err != nil {
-		t.Fatalf("WriteUDPConn failed: %v", err)
-	}
-	if len(rawConn.writes) == 0 {
-		t.Fatal("expected underlying transport write")
-	}
-	lastWrite := rawConn.writes[len(rawConn.writes)-1]
-	if string(lastWrite) == string(payload) {
-		t.Fatalf("expected encoded packet, got raw payload %q", string(lastWrite))
-	}
-	if len(lastWrite) <= len(payload) {
-		t.Fatalf("expected encoded packet larger than payload: got %d want > %d", len(lastWrite), len(payload))
+	if !strings.Contains(err.Error(), "shadowsocks 2022 is unsupported") {
+		t.Fatalf("expected unsupported SS2022 error, got %v", err)
 	}
 }

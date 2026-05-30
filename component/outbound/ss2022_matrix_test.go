@@ -77,36 +77,42 @@ func TestSS2022_NewFromLink_Matrix(t *testing.T) {
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-aes-128-gcm", psk16A, "n1")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_128_multi_psk_valid_userinfo",
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-aes-128-gcm", strings.Join([]string{psk16A, psk16B}, ":"), "n2")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_256_single_psk_valid_userinfo",
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-aes-256-gcm", psk32A, "n3")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_256_multi_psk_valid_userinfo",
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-aes-256-gcm", strings.Join([]string{psk32A, psk32B}, ":"), "n4")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_256_single_psk_valid_whole_link_base64",
 			buildLink: func() string {
 				return buildSSLinkWholeBase64("2022-blake3-aes-256-gcm", psk32A, "n5")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_256_single_psk_valid_percent_encoded_password",
 			buildLink: func() string {
 				return buildSSLinkURLUserInfo("2022-blake3-aes-256-gcm", psk32A, "n5b")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "aes_256_invalid_base64_psk",
@@ -141,12 +147,14 @@ func TestSS2022_NewFromLink_Matrix(t *testing.T) {
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-chacha20-poly1305", psk32A, "n6")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "chacha20_multi_psk_valid_userinfo",
 			buildLink: func() string {
 				return buildSSLinkUserInfo("2022-blake3-chacha20-poly1305", strings.Join([]string{psk32A, psk32B}, ":"), "n7")
 			},
+			wantErrMatch: "shadowsocks 2022 is unsupported",
 		},
 		{
 			name: "unsupported_ss2022_cipher",
