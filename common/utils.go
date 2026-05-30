@@ -441,6 +441,9 @@ func MagicNetworkWithIPVersion(network string, mark uint32, mptcp bool, ipVersio
 	if mark == 0 && !mptcp && ipVersion == "" {
 		return network
 	}
+	if network == "" {
+		return network
+	}
 	return netproxy.MagicNetwork{
 		Network:   network,
 		Mark:      mark,

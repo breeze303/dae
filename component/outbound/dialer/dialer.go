@@ -23,8 +23,13 @@ import (
 	D "github.com/daeuniverse/outbound/dialer"
 	stickyip "github.com/daeuniverse/outbound/dialer/stickyip"
 	"github.com/daeuniverse/outbound/netproxy"
+	"github.com/daeuniverse/outbound/protocol/direct"
 	"github.com/sirupsen/logrus"
 )
+
+func init() {
+	direct.InitDirectDialers("")
+}
 
 // Connectivity check indices.
 //
@@ -242,6 +247,10 @@ func NewDialer(dialer netproxy.Dialer, option *GlobalOption, iOption InstanceOpt
 
 // NewDialerContext is for internal use with lifecycle management.
 func NewDialerContext(ctx context.Context, dialer netproxy.Dialer, option *GlobalOption, iOption InstanceOption, property *Property) *Dialer {
+	if dialer == nil {
+		direct.InitDirectDialers("")
+		dialer = direct.SymmetricDirect
+	}
 	var collections [8]*collection
 	for _, i := range []int{IdxDnsUdp4, IdxDnsUdp6, IdxTcp4, IdxTcp6, IdxUdp4, IdxUdp6} {
 		collections[i] = newCollection()
