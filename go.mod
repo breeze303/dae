@@ -110,5 +110,4 @@ require (
 //replace github.com/cilium/ebpf v0.20.0
 //replace github.com/daeuniverse/dae-config-dist/go/dae_config => /home/mzz/antlrProjects/dae-config/build/go/dae_config
 
-// Use the workspace-local outbound checkout while developing dae glue.
-replace github.com/daeuniverse/outbound => ../outbound
+replace github.com/daeuniverse/outbound => github.com/breeze303/outbound v0.0.0-20260531045343-80f8be47bfab

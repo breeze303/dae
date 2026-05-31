@@ -47,6 +47,10 @@ github.com/bodgit/sevenzip v1.6.1 h1:kikg2pUMYC9ljU7W9SaqHXhym5HyKm8/M/jd31fYan4
 github.com/bodgit/sevenzip v1.6.1/go.mod h1:GVoYQbEVbOGT8n2pfqCIMRUaRjQ8F9oSqoBEqZh5fQ8=
 github.com/bodgit/windows v1.0.1 h1:tF7K6KOluPYygXa3Z2594zxlkbKPAOvqr97etrGNIz4=
 github.com/bodgit/windows v1.0.1/go.mod h1:a6JLwrB4KrTR5hBpp8FI9/9W9jJfeQ2h4XDXU74ZCdM=
+github.com/breeze303/outbound v0.0.0-20260530072021-5665e64e8e4c h1:aVz9ddKP4//hQFYUr01NdYhcWd2Mr/Aur9ojsiVeSfE=
+github.com/breeze303/outbound v0.0.0-20260530072021-5665e64e8e4c/go.mod h1:fywFXIIfFeyG+oMat6h7MExY99CNtERbhrH0DYSr/6g=
+github.com/breeze303/outbound v0.0.0-20260531045343-80f8be47bfab h1:adXIbrYR7MXAK+2Mes+DS+4exnCh3MOVKe2Xq7UV8Qw=
+github.com/breeze303/outbound v0.0.0-20260531045343-80f8be47bfab/go.mod h1:HKK2GI7OBxGdb3g+VYZWen2ydX0fH0QkpDOFpbl8u9E=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
